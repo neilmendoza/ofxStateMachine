@@ -35,7 +35,6 @@
 #include <map>
 #include <string>
 #include <iostream>
-#include "ofLog.h"
 #include "ofxState.h"
 
 using namespace std;
