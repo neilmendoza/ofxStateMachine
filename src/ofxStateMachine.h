@@ -41,7 +41,7 @@ using namespace std;
 using namespace tr1;
 
 namespace Apex
-{	
+{
 	template<class SharedData = ofxEmptyData>
 	class ofxStateMachine
 	{
@@ -60,20 +60,27 @@ namespace Apex
 		}
 		
 		/** State Stuff **/ 
-		void addState(ofxState<SharedData>* state)
+		statePtr addState(ofxState<SharedData>* state)
 		{
 			// we call setup here rather than use the setup event in case the state is added after
 			// setup event has occured
 			state->setSharedData(&sharedData);
 			state->setup();
 			ofAddListener(state->changeStateEvent, this, &ofxStateMachine::onChangeState);
-			states.insert(make_pair(state->getName(), statePtr(state)));
+			statePtr ptr(state);
+			states.insert(make_pair(state->getName(), ptr));
+			return ptr;
 		}
 		
 		SharedData& getSharedData()
 		{
 			return sharedData;
-		}		
+		}
+		
+		map<string, statePtr> getStates() const
+		{
+			return states;
+		}
 		
 		void onChangeState(string& stateName)
 		{
@@ -114,7 +121,6 @@ namespace Apex
 			else ofLog(OF_LOG_WARNING, "State machine draw called with no state set");
 		}
 		
-#ifdef TARGET_OPENGLES
 		/** Touch Event Stuff **/
 		void enableTouchEvents()
 		{
@@ -130,7 +136,8 @@ namespace Apex
 		void onTouchMoved(ofTouchEventArgs &data) { if (currentState) currentState->touchMoved(data); }
 		void onTouchCancelled(ofTouchEventArgs &data) { if (currentState) currentState->touchCancelled(data); }
 		void onTouchDoubleTap(ofTouchEventArgs &data) { if (currentState) currentState->touchDoubleTap(data); }
-#else
+
+#ifndef OPENGL_ES
 		/** Mouse Event Stuff **/
 		void enableMouseEvents()
 		{
@@ -148,7 +155,7 @@ namespace Apex
 		
 	private:
 		statePtr currentState;
-		map<string, shared_ptr< ofxState<SharedData> > > states;
+		map<string, statePtr > states;
 		SharedData sharedData;
 	};
 }

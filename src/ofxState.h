@@ -54,13 +54,13 @@ namespace Apex
 		virtual void draw() {}
 		virtual string getName() = 0;
 		
-#ifdef TARGET_OPENGLES
 		virtual void touchDown(ofTouchEventArgs& touch) {}
 		virtual void touchMoved(ofTouchEventArgs& touch) {}
 		virtual void touchUp(ofTouchEventArgs& touch) {}
 		virtual void touchDoubleTap(ofTouchEventArgs& touch) {}
 		virtual void touchCancelled(ofTouchEventArgs& touch) {}
-#else
+
+#ifndef TARGET_OPENGLES
 		virtual void mouseReleased(ofMouseEventArgs& data) {}
 		virtual void mousePressed(ofMouseEventArgs& data) {}
 		virtual void mouseMoved(ofMouseEventArgs& data) {}
