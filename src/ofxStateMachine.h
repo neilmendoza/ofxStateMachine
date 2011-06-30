@@ -31,7 +31,11 @@
  */
 #pragma once
 
+#ifdef TARGET_WIN32
+#include <memory>
+#else
 #include <tr1/memory>
+#endif
 #include <map>
 #include <string>
 #include <iostream>
@@ -56,6 +60,7 @@ namespace Apex
 			enableTouchEvents();
 #else
 			enableMouseEvents();
+			enableKeyEvents();
 #endif
 		}
 		
@@ -119,6 +124,25 @@ namespace Apex
 		{
 			if (currentState) currentState->draw();
 			else ofLog(OF_LOG_WARNING, "State machine draw called with no state set");
+		}
+		
+		/** Key Event Stuff **/
+		void enableKeyEvents()
+		{
+			ofAddListener(ofEvents.keyPressed, this, &ofxStateMachine::onKeyPressed);
+			ofAddListener(ofEvents.keyReleased, this, &ofxStateMachine::onKeyReleased);
+		}
+		
+		void onKeyPressed(ofKeyEventArgs& data)
+		{
+			if (currentState) currentState->keyPressed(data.key);
+			else ofLog(OF_LOG_WARNING, "State machine keyPressed called with no state set");
+		}
+		
+		void onKeyReleased(ofKeyEventArgs& data)
+		{
+			if (currentState) currentState->keyReleased(data.key);
+			else ofLog(OF_LOG_WARNING, "State machine keyReleased called with no state set");
 		}
 		
 		/** Touch Event Stuff **/
