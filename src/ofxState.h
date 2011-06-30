@@ -32,7 +32,11 @@
 #pragma once
 
 #include "ofEvents.h"
+#ifdef TARGET_WIN32
+#include <memory>
+#else
 #include <tr1/memory>
+#endif
 #include "ofMain.h"
 
 using namespace tr1;
@@ -65,6 +69,9 @@ namespace Apex
 		virtual void mousePressed(ofMouseEventArgs& data) {}
 		virtual void mouseMoved(ofMouseEventArgs& data) {}
 		virtual void mouseDragged(ofMouseEventArgs& data) {}
+		
+		virtual void keyPressed(int key) {}
+		virtual void keyReleased(int key) {}
 #endif
 		void changeState(string stateName)
 		{
