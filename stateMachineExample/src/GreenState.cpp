@@ -33,10 +33,10 @@
 
 void GreenState::update()
 {
-	if (ofGetElapsedTimeMillis() - sharedData->lastUpdate > 200)
+	if (ofGetElapsedTimeMillis() - getSharedData().lastUpdate > 200)
 	{
-		sharedData->counter++;
-		sharedData->lastUpdate = ofGetElapsedTimeMillis();
+		getSharedData().counter++;
+		getSharedData().lastUpdate = ofGetElapsedTimeMillis();
 	}
 }
 
@@ -44,7 +44,7 @@ void GreenState::draw()
 {
 	ofBackground(0, 255, 0);
 	ofSetColor(255, 0, 0);
-	sharedData->font.drawString(ofToString(sharedData->counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
+	getSharedData().font.drawString(ofToString(getSharedData().counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
 }
 
 string GreenState::getName()

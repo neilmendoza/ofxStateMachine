@@ -41,7 +41,7 @@
 
 using namespace tr1;
 
-namespace Apex
+namespace itg
 {
 	class ofxEmptyData
 	{
@@ -82,9 +82,12 @@ namespace Apex
 	
 		virtual ~ofxState() {}
 		
+        SharedData& getSharedData() { return *sharedData; }
 		void setSharedData(SharedData* sharedData) { this->sharedData = sharedData; }
 		
-	protected:
+	private:
 		SharedData* sharedData;
 	};	
 }
+
+namespace Apex = itg;

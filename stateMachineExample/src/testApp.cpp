@@ -3,8 +3,7 @@
 #include "GreenState.h"
 
 //--------------------------------------------------------------
-void testApp::setup()
-{
+void testApp::setup(){
 	// setup shared data
 	stateMachine.getSharedData().counter = 0;
 	stateMachine.getSharedData().lastUpdate = ofGetElapsedTimeMillis();
@@ -18,11 +17,13 @@ void testApp::setup()
 
 //--------------------------------------------------------------
 void testApp::update(){
+
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    ofSetColor(0, 0, 0);
+    ofDrawBitmapString("Mouse click changes state", 20, 20);
 }
 
 //--------------------------------------------------------------
@@ -57,5 +58,15 @@ void testApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
+
+}
+
+//--------------------------------------------------------------
+void testApp::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void testApp::dragEvent(ofDragInfo dragInfo){ 
 
 }

@@ -44,7 +44,7 @@
 using namespace std;
 using namespace tr1;
 
-namespace Apex
+namespace itg
 {
 	template<class SharedData = ofxEmptyData>
 	class ofxStateMachine
@@ -109,6 +109,12 @@ namespace Apex
 		{
 			ofAddListener(ofEvents.update, this, &ofxStateMachine::onUpdate);
 			ofAddListener(ofEvents.draw, this, &ofxStateMachine::onDraw);
+		}
+        
+        void disableAppEvents()
+		{
+			ofRemoveListener(ofEvents.update, this, &ofxStateMachine::onUpdate);
+			ofRemoveListener(ofEvents.draw, this, &ofxStateMachine::onDraw);
 		}
 		
 		void onUpdate(ofEventArgs &data) { update(); }
@@ -183,3 +189,5 @@ namespace Apex
 		SharedData sharedData;
 	};
 }
+
+namespace Apex = itg;
