@@ -43,7 +43,7 @@ itg::ofxStateMachine<MySharedData> stateMachine;
 class MyState : public itg::ofxState<MySharedData>
 ```
 
-To access shared data from within a state simple call **getSharedData()**
+To access shared data from within a state simple call **getSharedData()**...
 
 ```cpp
 void MyState::update()
