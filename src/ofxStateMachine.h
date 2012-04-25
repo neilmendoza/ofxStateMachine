@@ -177,10 +177,10 @@ namespace itg
 			ofAddListener(ofEvents.mouseDragged, this, &ofxStateMachine::onMouseDragged);
 		}
 		
-		void onMouseReleased(ofMouseEventArgs& data) { if (currentState) currentState->mouseReleased(data); }
-		void onMousePressed(ofMouseEventArgs& data) { if (currentState) currentState->mousePressed(data); }
-		void onMouseMoved(ofMouseEventArgs& data) { if (currentState) currentState->mouseMoved(data); }
-		void onMouseDragged(ofMouseEventArgs& data) { if (currentState) currentState->mouseDragged(data); }
+		void onMouseReleased(ofMouseEventArgs& data) { if (currentState) currentState->mouseReleased(data.x, data.y, data.button); }
+		void onMousePressed(ofMouseEventArgs& data) { if (currentState) currentState->mousePressed(data.x, data.y, data.button); }
+		void onMouseMoved(ofMouseEventArgs& data) { if (currentState) currentState->mouseMoved(data.x, data.y); }
+		void onMouseDragged(ofMouseEventArgs& data) { if (currentState) currentState->mouseDragged(data.x, data.y, data.button); }
 #endif
 		
 	private:

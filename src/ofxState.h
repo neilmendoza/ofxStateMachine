@@ -65,10 +65,17 @@ namespace itg
 		virtual void touchCancelled(ofTouchEventArgs& touch) {}
 
 #ifndef TARGET_OPENGLES
-		virtual void mouseReleased(ofMouseEventArgs& data) {}
+		/* Please use the functions below instead
+        virtual void mouseReleased(ofMouseEventArgs& data) {}
 		virtual void mousePressed(ofMouseEventArgs& data) {}
 		virtual void mouseMoved(ofMouseEventArgs& data) {}
 		virtual void mouseDragged(ofMouseEventArgs& data) {}
+        */
+        
+		virtual void mouseMoved(int x, int y) {}
+		virtual void mouseDragged(int x, int y, int button) {}
+		virtual void mousePressed(int x, int y, int button) {}
+		virtual void mouseReleased(int x, int y, int button) {}
 		
 		virtual void keyPressed(int key) {}
 		virtual void keyReleased(int key) {}
