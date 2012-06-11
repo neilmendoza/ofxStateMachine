@@ -107,14 +107,14 @@ namespace itg
 		/** App Event Stuff **/
 		void enableAppEvents()
 		{
-			ofAddListener(ofEvents.update, this, &ofxStateMachine::onUpdate);
-			ofAddListener(ofEvents.draw, this, &ofxStateMachine::onDraw);
+			ofAddListener(ofEvents().update, this, &ofxStateMachine::onUpdate);
+			ofAddListener(ofEvents().draw, this, &ofxStateMachine::onDraw);
 		}
         
         void disableAppEvents()
 		{
-			ofRemoveListener(ofEvents.update, this, &ofxStateMachine::onUpdate);
-			ofRemoveListener(ofEvents.draw, this, &ofxStateMachine::onDraw);
+			ofRemoveListener(ofEvents().update, this, &ofxStateMachine::onUpdate);
+			ofRemoveListener(ofEvents().draw, this, &ofxStateMachine::onDraw);
 		}
 		
 		void onUpdate(ofEventArgs &data) { update(); }
@@ -135,8 +135,8 @@ namespace itg
 		/** Key Event Stuff **/
 		void enableKeyEvents()
 		{
-			ofAddListener(ofEvents.keyPressed, this, &ofxStateMachine::onKeyPressed);
-			ofAddListener(ofEvents.keyReleased, this, &ofxStateMachine::onKeyReleased);
+			ofAddListener(ofEvents().keyPressed, this, &ofxStateMachine::onKeyPressed);
+			ofAddListener(ofEvents().keyReleased, this, &ofxStateMachine::onKeyReleased);
 		}
 		
 		void onKeyPressed(ofKeyEventArgs& data)
@@ -154,11 +154,11 @@ namespace itg
 		/** Touch Event Stuff **/
 		void enableTouchEvents()
 		{
-			ofAddListener(ofEvents.touchUp, this, &ofxStateMachine::onTouchUp);
-			ofAddListener(ofEvents.touchDown, this, &ofxStateMachine::onTouchDown);
-			ofAddListener(ofEvents.touchMoved, this, &ofxStateMachine::onTouchMoved);
-			ofAddListener(ofEvents.touchCancelled, this, &ofxStateMachine::onTouchCancelled);
-			ofAddListener(ofEvents.touchDoubleTap, this, &ofxStateMachine::onTouchDoubleTap);
+			ofAddListener(ofEvents().touchUp, this, &ofxStateMachine::onTouchUp);
+			ofAddListener(ofEvents().touchDown, this, &ofxStateMachine::onTouchDown);
+			ofAddListener(ofEvents().touchMoved, this, &ofxStateMachine::onTouchMoved);
+			ofAddListener(ofEvents().touchCancelled, this, &ofxStateMachine::onTouchCancelled);
+			ofAddListener(ofEvents().touchDoubleTap, this, &ofxStateMachine::onTouchDoubleTap);
 		}
 		
 		void onTouchUp(ofTouchEventArgs &data) { if (currentState) currentState->touchUp(data); }
@@ -171,10 +171,10 @@ namespace itg
 		/** Mouse Event Stuff **/
 		void enableMouseEvents()
 		{
-			ofAddListener(ofEvents.mouseReleased, this, &ofxStateMachine::onMouseReleased);
-			ofAddListener(ofEvents.mousePressed, this, &ofxStateMachine::onMousePressed);
-			ofAddListener(ofEvents.mouseMoved, this, &ofxStateMachine::onMouseMoved);
-			ofAddListener(ofEvents.mouseDragged, this, &ofxStateMachine::onMouseDragged);
+			ofAddListener(ofEvents().mouseReleased, this, &ofxStateMachine::onMouseReleased);
+			ofAddListener(ofEvents().mousePressed, this, &ofxStateMachine::onMousePressed);
+			ofAddListener(ofEvents().mouseMoved, this, &ofxStateMachine::onMouseMoved);
+			ofAddListener(ofEvents().mouseDragged, this, &ofxStateMachine::onMouseDragged);
 		}
 		
 		void onMouseReleased(ofMouseEventArgs& data) { if (currentState) currentState->mouseReleased(data.x, data.y, data.button); }
