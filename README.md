@@ -66,3 +66,11 @@ changeState("mystate");
 ```
 
 ...from within a state.
+
+Pre 0071
+========
+If you are using a version of OF that is older than 0071, you will need to checkout an older version of the addon.  Run the following command in the directory that you clone the addon to...
+
+```bash
+git checkout a9b94a9bb65389478c8ceb268dc98bcec2d46699
+``` 
