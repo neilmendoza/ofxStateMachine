@@ -1,5 +1,5 @@
 /*
- *  GreenState.cpp
+ *  GreenState.h
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -29,30 +29,16 @@
  *  POSSIBILITY OF SUCH DAMAGE. 
  *
  */
-#include "GreenState.h"
+#pragma once
 
-void GreenState::update()
-{
-	if (ofGetElapsedTimeMillis() - getSharedData().lastUpdate > 200)
-	{
-		getSharedData().counter++;
-		getSharedData().lastUpdate = ofGetElapsedTimeMillis();
-	}
-}
+#include "ofxState.h"
+#include "SharedData.h"
 
-void GreenState::draw()
+class GreenState : public itg::ofxState<SharedData>
 {
-	ofBackground(0, 255, 0);
-	ofSetColor(255, 0, 0);
-	getSharedData().font.drawString(ofToString(getSharedData().counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
-}
-
-string GreenState::getName()
-{
-	return "green";
-}
-
-void GreenState::mousePressed(ofMouseEventArgs& data)
-{
-	changeState("red");
-}
+public:
+	void update();
+	void draw();
+	void mousePressed(int x, int y, int button);
+	string getName();
+};

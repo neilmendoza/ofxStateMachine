@@ -1,5 +1,5 @@
 /*
- *  GreenState.h
+ *  GreenState.cpp
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -29,16 +29,30 @@
  *  POSSIBILITY OF SUCH DAMAGE. 
  *
  */
-#pragma once
+#include "GreenState.h"
 
-#include "ofxState.h"
-#include "SharedData.h"
-
-class GreenState : public Apex::ofxState<SharedData>
+void GreenState::update()
 {
-public:
-	void update();
-	void draw();
-	void mousePressed(ofMouseEventArgs& data);
-	string getName();
-};
+	if (ofGetElapsedTimeMillis() - getSharedData().lastUpdate > 200)
+	{
+		getSharedData().counter++;
+		getSharedData().lastUpdate = ofGetElapsedTimeMillis();
+	}
+}
+
+void GreenState::draw()
+{
+	ofBackground(0, 255, 0);
+	ofSetColor(255, 0, 0);
+	getSharedData().font.drawString(ofToString(getSharedData().counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
+}
+
+string GreenState::getName()
+{
+	return "green";
+}
+
+void GreenState::mousePressed(int x, int y, int button)
+{
+	changeState("red");
+}

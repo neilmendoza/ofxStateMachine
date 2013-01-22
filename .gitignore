@@ -1,2 +1,3 @@
-stateMachineExample/stateMachineExample.xcodeproj/project.xcworkspace/xcuserdata
-stateMachineExample/bin/
+*/*/*/xcuserdata
+*/*/xcuserdata
+*/bin/*.app

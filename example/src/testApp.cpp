@@ -10,8 +10,8 @@ void testApp::setup(){
 	stateMachine.getSharedData().font.loadFont("vag.ttf", 50);
 	
 	// initialise state machine
-	stateMachine.addState(new RedState());
-	stateMachine.addState(new GreenState());
+	stateMachine.addState<RedState>();
+	stateMachine.addState<GreenState>();
 	stateMachine.changeState("green");
 }
 

@@ -50,8 +50,8 @@ namespace itg
 	class ofxStateMachine
 	{
 	public:
-		typedef shared_ptr< ofxState<SharedData> > statePtr;
-		typedef typename map<string, statePtr>::iterator stateIt;
+		typedef shared_ptr< ofxState<SharedData> > StatePtr;
+		typedef typename map<string, StatePtr>::iterator stateIt;
 		
 		ofxStateMachine()
 		{
@@ -63,18 +63,33 @@ namespace itg
 			enableKeyEvents();
 #endif
 		}
-		
+        
+        template<class T>
+        StatePtr addState()
+        {
+            StatePtr state = StatePtr(new T);
+            return addState(state);
+        }
+        
 		/** State Stuff **/ 
-		statePtr addState(ofxState<SharedData>* state)
+		StatePtr addState(StatePtr state)
 		{
 			// we call setup here rather than use the setup event in case the state is added after
 			// setup event has occured
 			state->setSharedData(&sharedData);
 			state->setup();
 			ofAddListener(state->changeStateEvent, this, &ofxStateMachine::onChangeState);
-			statePtr ptr(state);
-			states.insert(make_pair(state->getName(), ptr));
-			return ptr;
+			states.insert(make_pair(state->getName(), state));
+			return state;
+		}
+        
+        /*
+         * @deprecated
+         */
+        StatePtr addState(ofxState<SharedData>* state)
+		{
+            StatePtr ptr = StatePtr(state);
+			return addState(ptr);
 		}
 		
 		SharedData& getSharedData()
@@ -82,7 +97,7 @@ namespace itg
 			return sharedData;
 		}
 		
-		map<string, statePtr> getStates() const
+		map<string, StatePtr> getStates() const
 		{
 			return states;
 		}
@@ -184,8 +199,8 @@ namespace itg
 #endif
 		
 	private:
-		statePtr currentState;
-		map<string, statePtr > states;
+		StatePtr currentState;
+		map<string, StatePtr > states;
 		SharedData sharedData;
 	};
 }

@@ -1,5 +1,5 @@
 /*
- *  RedState.h
+ *  RedState.cpp
  *
  *  Copyright (c) 2011, Neil Mendoza, http://www.neilmendoza.com
  *  All rights reserved. 
@@ -29,16 +29,30 @@
  *  POSSIBILITY OF SUCH DAMAGE. 
  *
  */
-#pragma once
+#include "RedState.h"
 
-#include "ofxState.h"
-#include "SharedData.h"
-
-class RedState : public Apex::ofxState<SharedData>
+void RedState::update()
 {
-public:
-	void update();
-	void draw();
-	void mousePressed(ofMouseEventArgs& data);
-	string getName();
-};
+	if (ofGetElapsedTimeMillis() - getSharedData().lastUpdate > 1000)
+	{
+		getSharedData().counter--;
+		getSharedData().lastUpdate = ofGetElapsedTimeMillis();
+	}
+}
+
+void RedState::draw()
+{
+	ofBackground(255, 0, 0);
+	ofSetColor(0, 255, 0);
+	getSharedData().font.drawString(ofToString(getSharedData().counter), ofGetWidth() >> 1, ofGetHeight() >> 1);
+}
+
+void RedState::mousePressed(int x, int y, int button)
+{
+	changeState("green");
+}
+
+string RedState::getName()
+{
+	return "red";
+}
