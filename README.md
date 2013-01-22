@@ -25,7 +25,7 @@ itg::ofxStateMachine<> stateMachine;
 Add your states to the state machine in your OF app **setup()** and choose your initial state...
 
 ```cpp
-stateMachine.addState(new MyState());
+stateMachine.addState<MyState>();
 stateMachine.changeState("mystate");
 ```
 
