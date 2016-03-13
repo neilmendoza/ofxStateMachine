@@ -31,15 +31,7 @@
  */
 #pragma once
 
-#include "ofEvents.h"
-#ifdef TARGET_WIN32
-#include <memory>
-#else
-#include <tr1/memory>
-#endif
 #include "ofMain.h"
-
-using namespace tr1;
 
 namespace itg
 {

@@ -7,7 +7,7 @@ void testApp::setup(){
 	// setup shared data
 	stateMachine.getSharedData().counter = 0;
 	stateMachine.getSharedData().lastUpdate = ofGetElapsedTimeMillis();
-	stateMachine.getSharedData().font.loadFont("vag.ttf", 50);
+	stateMachine.getSharedData().font.load("vag.ttf", 50);
 	
 	// initialise state machine
 	stateMachine.addState<RedState>();
