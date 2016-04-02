@@ -113,16 +113,19 @@ namespace itg
 		{
 			ofAddListener(ofEvents().update, this, &ofxStateMachine::onUpdate);
 			ofAddListener(ofEvents().draw, this, &ofxStateMachine::onDraw);
+			ofAddListener(ofEvents().exit, this, &ofxStateMachine::onExit);
 		}
         
         void disableAppEvents()
 		{
 			ofRemoveListener(ofEvents().update, this, &ofxStateMachine::onUpdate);
 			ofRemoveListener(ofEvents().draw, this, &ofxStateMachine::onDraw);
+			ofRemoveListener(ofEvents().exit, this, &ofxStateMachine::onExit);
 		}
 		
 		void onUpdate(ofEventArgs &data) { update(); }
 		void onDraw(ofEventArgs &data) { draw(); }
+		void onExit(ofEventArgs &data) { exit(); }
 		
 		void update()
 		{
@@ -136,6 +139,12 @@ namespace itg
 			else ofLog(OF_LOG_WARNING, "State machine draw called with no state set");
 		}
 		
+		void exit()
+		{
+			if (currentState) currentState->stateExit();
+			else ofLog(OF_LOG_WARNING, "State machine exit called with no state set");
+		}
+
 		/** Key Event Stuff **/
 		void enableKeyEvents()
 		{
